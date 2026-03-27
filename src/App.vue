@@ -1,7 +1,50 @@
 <template>
   <div>
-    <Beverage :isIced="beverageStore.currentTemp === 'Cold'" />
+    <Beverage 
+      :isIced="currentTemp === 'Cold'" 
+      :base="currentBase"
+      :creamer="currentCreamer"
+      :syrup="currentSyrup"
+    />
     <ul>
+      <li>
+        <template v-for="temp in temps" :key="temp">
+          <label>
+            <input 
+              type="radio" 
+              name="temperature" 
+              :id="`r${temp}`"
+              :value="temp" 
+              v-model="currentTemp" 
+            />
+            {{ temp }}
+          </label>
+        </template>
+      </li>
+      <li>
+        <template v-for="base in bases" :key="base.id">
+          <label>
+            <input type="radio" name="base" :value="base" v-model="currentBase" />
+            {{ base.name }}
+          </label>
+        </template>
+      </li>
+      <li>
+        <template v-for="creamer in creamers" :key="creamer.id">
+          <label>
+            <input type="radio" name="creamer" :value="creamer" v-model="currentCreamer" />
+            {{ creamer.name }}
+          </label>
+        </template>
+      </li>
+      <li>
+        <template v-for="syrup in syrups" :key="syrup.id">
+          <label>
+            <input type="radio" name="syrup" :value="syrup" v-model="currentSyrup" />
+            {{ syrup.name }}
+          </label>
+        </template>
+      </li>
       <li>
         <template v-for="temp in beverageStore.temps" :key="temp">
           <label>
@@ -26,6 +69,12 @@
 <script setup lang="ts">
 import Beverage from "./components/Beverage.vue";
 import { useBeverageStore } from "./stores/beverageStore";
+import { 
+  temps, currentTemp, 
+  bases, currentBase, 
+  creamers, currentCreamer, 
+  syrups, currentSyrup 
+} from "./stores/beverage";
 const beverageStore = useBeverageStore();
 </script>
 
