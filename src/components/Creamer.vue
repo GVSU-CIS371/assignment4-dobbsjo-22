@@ -10,7 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import { currentCreamer } from "../stores/beverage";
+import { useBeverageStore } from "../stores/beverageStore";
+import { storeToRefs } from "pinia";
+const { currentCreamer } = storeToRefs(useBeverageStore());
 </script>
 
 <style lang="scss" scoped>

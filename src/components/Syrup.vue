@@ -1,13 +1,13 @@
 <template>
-  <div 
-    class="syrup" 
-    :style="{ backgroundColor: currentSyrup.color }"
-  ></div>
+  <div class="syrup" :style="{ backgroundColor: currentSyrup.color }"></div>
 </template>
 
 <script setup lang="ts">
-import { currentSyrup } from "../stores/beverage";
+import { useBeverageStore } from "../stores/beverageStore";
+import { storeToRefs } from "pinia";
+const { currentSyrup } = storeToRefs(useBeverageStore());
 </script>
+
 <style lang="scss" scoped>
 .syrup {
   transform: translateY(400%);
